@@ -1,0 +1,4 @@
+def printMyName(name,age):
+	print("My name is :");
+	print("My age is :");
+
