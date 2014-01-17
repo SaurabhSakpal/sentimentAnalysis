@@ -1,5 +1,5 @@
 import nltk;
-
+from nltk.util import ngrams;
 def tokenizeContent(content,ON):
 	tokens = nltk.word_tokenize(content);
 	if ON:
@@ -33,3 +33,22 @@ def count_adjectives(adjectives,ON):
 	if ON:
 		print(adj_count);
 	return adj_count;
+
+def bigramIdentify(content,n,ON):
+	i = 0;
+	sen = [];
+	sixgrams = ngrams(content.split(), n);
+	for grams in sixgrams:
+  		m = list(grams);
+		t =nltk.pos_tag(m);
+		k = t[1];
+		l = t[0];
+		if k[1] == "JJ":
+			if l[1] == "RB":
+				print(l[0]+" "+k[0]);
+
+n = 2;
+filename = "neg/Rev34.txt";
+f = open(filename);
+content = f.read();
+bigramIdentify(content,n,False);
