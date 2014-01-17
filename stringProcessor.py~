@@ -34,21 +34,32 @@ def count_adjectives(adjectives,ON):
 		print(adj_count);
 	return adj_count;
 
-def bigramIdentify(content,n,ON):
-	i = 0;
+def bigramIdentify(content):
 	sen = [];
-	sixgrams = ngrams(content.split(), n);
-	for grams in sixgrams:
-  		m = list(grams);
-		t =nltk.pos_tag(m);
-		k = t[1];
-		l = t[0];
-		if k[1] == "JJ":
-			if l[1] == "RB":
-				print(l[0]+" "+k[0]);
+	bi_grams = ngrams(content.split(), 2);
+	for grams in bi_grams:
+  		list_grams = list(grams);
+		tagged_bigrams =nltk.pos_tag(list_grams);
+		possible_adjective = tagged_bigrams[1];
+		possible_adverb = tagged_bigrams[0];
+		if possible_adjective[1] == "JJ":
+			if possible_adverb[1] == "RB":
+				print(possible_adverb[0]+" "+possible_adjective[0]);
 
-n = 2;
-filename = "neg/Rev0.txt";
-f = open(filename);
-content = f.read();
-bigramIdentify(content,n,False);
+def trigramIdentify(content):
+	sen = [];
+	trigrams = ngrams(content.split(), 3);
+	for igrams in trigrams:
+  		list_grams = list(igrams);
+		tagged_trigrams =nltk.pos_tag(list_grams);
+		possible_adjective = tagged_trigrams[2];
+		possible_adverb2 = tagged_trigrams[1];
+		possible_adverb1 = tagged_trigrams[0];
+		if possible_adjective[1] == "JJ":
+			if possible_adverb1[1] == "RB":
+				if possible_adverb1[1] == "RB":
+					print(possible_adverb1[0]+" "+possible_adverb2[0]+" "+possible_adjective[0]);
+
+content = "she is very very beautiful";
+trigramIdentify(content);
+bigramIdentify(content);
