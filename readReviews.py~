@@ -11,30 +11,34 @@ db = databaseModule.setup_database_connection(server,user,password,database_name
 
 dir_list = ["neg/","pos/"];
 for i in dir_list:
-	for j in range(1000):
-		filename = i+"Rev"+str(j+1)+".txt";
+	for j in range(1):
+		filename = i+"Rev"+str(j)+".txt";
 		filepath = "~/Desktop/BEProject/"+i+"Rev"+str(j+1)+".txt";
 		try:
-			f = open(filename);
-			content = f.read();
-			#print(f);
-			tokens = stringProcessor.tokenizeContent(content,False);
-			tagged = stringProcessor.part_of_speach_tagging(tokens,False);
-			adjective_list = stringProcessor.select_adjectives(tagged,False);
-			adj_count = stringProcessor.count_adjectives(adjective_list,False);
-			if i=="neg/":
+			if(j<10):
+				f = open(filename);
+				content = f.read();
 				#print(f);
-				#fileobject = open(tempname,'wb');
-				#fileobject.write(content);
-    				#fileobject.close();
-				#tokens = stringProcessor.tokenizeContent(content,False);
-				#tagged = stringProcessor.part_of_speach_tagging(tokens,False);
-				#adjective_list = stringProcessor.select_adjectives(tagged,False);
-				#adj_count = stringProcessor.count_adjectives(adjective_list,False);
-				databaseModule.insert_into_adjective(adj_count,"negative",db,True);
-				#databaseModule.insert_into_adjective(adj_count,"positive",db,True);
-			elif i =="pos/":
-				databaseModule.insert_into_adjective(adj_count,"positive",db,True);			
+				tokens = stringProcessor.tokenizeContent(content,True);
+				print("\n\n");
+				tagged = stringProcessor.part_of_speach_tagging(tokens,True);
+				print("\n\n");				
+				adjective_list = stringProcessor.select_adjectives(tagged,True);
+				print("\n\n");
+				adj_count = stringProcessor.count_adjectives(adjective_list,True);
+				if i=="neg/":
+					#print(f);
+					#fileobject = open(tempname,'wb');
+					#fileobject.write(content);
+	    				#fileobject.close();
+					#tokens = stringProcessor.tokenizeContent(content,False);
+					#tagged = stringProcessor.part_of_speach_tagging(tokens,False);
+					#adjective_list = stringProcessor.select_adjectives(tagged,False);
+					#adj_count = stringProcessor.count_adjectives(adjective_list,False);
+					databaseModule.insert_into_adjective(adj_count,"negative",db,f,True);
+					#databaseModule.insert_into_adjective(adj_count,"positive",db,True);
+				elif i =="pos/":
+					databaseModule.insert_into_adjective(adj_count,"positive",db,f,True);			
 		except:
 			#databaseModule.close_database_connection(db);
 			print("IO exception");

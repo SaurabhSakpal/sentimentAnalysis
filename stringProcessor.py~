@@ -34,7 +34,7 @@ def count_adjectives(adjectives,ON):
 		print(adj_count);
 	return adj_count;
 
-def bigramIdentify(content):
+def bigramIdentify(content, ON):
 	sen = [];
 	bi_grams = ngrams(content.split(), 2);
 	for grams in bi_grams:
@@ -43,7 +43,7 @@ def bigramIdentify(content):
 		possible_adjective = tagged_bigrams[1];
 		possible_adverb = tagged_bigrams[0];
 		if possible_adjective[1] == "JJ":
-			if possible_adverb[1] == "RB":
+			if possible_adverb[1] == "RB" and ON:
 				print(possible_adverb[0]+" "+possible_adjective[0]);
 
 def trigramIdentify(content):
@@ -57,9 +57,6 @@ def trigramIdentify(content):
 		possible_adverb1 = tagged_trigrams[0];
 		if possible_adjective[1] == "JJ":
 			if possible_adverb1[1] == "RB":
-				if possible_adverb1[1] == "RB":
+				if possible_adverb1[1] == "RB" && ON:
 					print(possible_adverb1[0]+" "+possible_adverb2[0]+" "+possible_adjective[0]);
 
-content = "she is very very beautiful";
-trigramIdentify(content);
-bigramIdentify(content);
