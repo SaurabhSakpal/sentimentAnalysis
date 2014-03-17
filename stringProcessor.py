@@ -17,7 +17,7 @@ def part_of_speach_tagging(tokens,ON):
 def select_adjectives(tagged,ON):
 	adjectives = [];
 	for i in tagged:
-		if str(i[1]) == "JJ":
+		if str(i[1]) == "JJ" or str(i[1]) == "JJS" or str(i[1]) == "JJR" or str(i[1]) == "JJT":
 			adjectives.append(i[0]);
 	if ON:
 		print(adjectives);
@@ -42,8 +42,13 @@ def bigramIdentify(content, ON):
 		tagged_bigrams =nltk.pos_tag(list_grams);
 		possible_adjective = tagged_bigrams[1];
 		possible_adverb = tagged_bigrams[0];
+<<<<<<< HEAD
 		if possible_adjective[1] == "JJ":
 			if possible_adverb[1] == "RB" and ON:
+=======
+		if possible_adjective[1] == "JJ" or possible_adjective[1] == "JJS" or possible_adjective[1] == "JJR" or possible_adjective[1] == "JJT":
+			if possible_adverb[1] == "RB" or possible_adverb1[1] == "RBR" or possible_adverb1[1] == "RBT":
+>>>>>>> 2c25de62ca37be0d6f103248510ee6d063cf7ec1
 				print(possible_adverb[0]+" "+possible_adjective[0]);
 
 def trigramIdentify(content):
@@ -55,8 +60,14 @@ def trigramIdentify(content):
 		possible_adjective = tagged_trigrams[2];
 		possible_adverb2 = tagged_trigrams[1];
 		possible_adverb1 = tagged_trigrams[0];
+<<<<<<< HEAD
 		if possible_adjective[1] == "JJ":
 			if possible_adverb1[1] == "RB":
 				if possible_adverb1[1] == "RB" and ON:
+=======
+		if possible_adjective[1] == "JJ" or possible_adjective[1] == "JJS" or possible_adjective[1] == "JJR" or possible_adjective[1] == "JJT":
+			if possible_adverb1[1] == "RB" or possible_adverb1[1] == "RBR" or possible_adverb1[1] == "RBT":
+				if possible_adverb2[1] == "RB":
+>>>>>>> 2c25de62ca37be0d6f103248510ee6d063cf7ec1
 					print(possible_adverb1[0]+" "+possible_adverb2[0]+" "+possible_adjective[0]);
 
